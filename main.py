@@ -1,7 +1,6 @@
 
          #?==Jarvis==
          #?==by AT==
-         #?==For my sister 💓
 
 
 from panel.jsons import load, dump
