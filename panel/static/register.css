@@ -42,10 +42,15 @@ input {
     text-align: center;
     border-width: 3px;
     border-radius: 15px;
-    border-color: black;
+    border-color: rgba(0, 0, 0, 0.5);
     border-style: dotted;
     margin-top: 8px;
-    background-color: rgba(0, 0, 0, 0.1)
+    background-color: rgba(0, 0, 0, 0.1);
+    color: gray;
+}
+
+input:focus  {
+    outline: none;
 }
 
 input[type="date"] {
@@ -58,6 +63,7 @@ button {
     font-size: 16px;
     color: grey;
     padding-top: 8px;
+    cursor: pointer;
 }
 
 .footer {

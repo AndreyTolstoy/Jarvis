@@ -3,8 +3,6 @@ import bcrypt
 import os
 import logging
 
-base_path = os.path.dirname(os.path.abspath(__file__))
-
 app = Flask(__name__)
 log = logging.getLogger('werkzeug') 
 log.setLevel(logging.ERROR)
@@ -13,17 +11,16 @@ log.setLevel(logging.ERROR)
 def home():
     data = jsons.load("jsons_data/data.json")
     if "name" not in data["cache"]:
-        if request.method == "POST":
-            data["cache"]["name"] = request.form.get("name")
-            data["cache"]["birthday"] = request.form.get("birthday")
-            data["cache"]["token"] = bcrypt.hashpw(bytes(request.form.get("token").strip(), encoding='utf-8'), bcrypt.gensalt(14)).decode() #Сохраняем хеш пароля
-            data["cache"]["ats"] = False
-            data["cache"]["outside"] = False
-            data["cache"]["logs"] = False
-            jsons.dump("jsons_data/data.json", data)
-        
-        else:
-         return render_template("register.html", password=True)     
+            if request.method == "POST":
+             data["cache"]["name"] = request.form.get("name")
+             data["cache"]["birthday"] = request.form.get("birthday")
+             data["cache"]["qm"] = False
+             data["cache"]["nm"] = False
+             data["cache"]["logs"] = False
+             jsons.dump("jsons_data/data.json", data)
+
+            else:
+             return render_template("register.html")
  
     active_plugin = request.args.get("active_plugin")
     active_plugin_name = active_plugin
@@ -31,7 +28,7 @@ def home():
     active_command = request.args.get("active_command")
     active_command_name = active_command
     active_command = (data["commands"][active_command_name] if active_command_name else None)
-    return render_template("index.html", data = data["cache"], plugins = data["plugins"], commands = data["commands"], active_plugin = active_plugin,active_plugin_name = active_plugin_name, active_command = active_command, active_command_name = active_command_name)
+    return render_template("index.html", data = data["cache"], plugins = data["plugins"], commands = data["commands"], active_plugin = active_plugin,active_plugin_name = active_plugin_name, active_command = active_command, active_command_name = active_command_name, sounds=os.listdir("Sounds"))
 
 @app.route("/plugin", methods=["POST"])
 def plugins():
@@ -42,21 +39,8 @@ def plugins():
          return redirect(url_for("home", active_plugin = active_plugin))
        
      else:
-        plugin_args = request.form.get("plugin_args")
-        if request.form.get("plugin_do") == "open" and plugin_args.startswith("os") == False and plugin_args.startswith("webb") == False:
-           data = f"webb.open'{plugin_args}'" if plugin_args.startswith("http") else f"os.system'{plugin_args}'"
-
-        elif request.form.get("plugin_do") == "key" and plugin_args.startswith("keyboard") == False:
-            data = f"keyboard.press_and_release'{plugin_args}'"
-
-        elif request.form.get("plugin_do") == "code":
-           data = request.form.get("plugin_args")
-
-        else:
-           data = plugin_args
-    
-        if request.form.get("plugin_name") and request.form.get("plugin_name"):
-         plugins["plugins"][request.form.get("plugin_name")] = {"data" : data, "do" : request.form.get("plugin_do").strip()}
+        if request.form.get("plugin_name"):
+         plugins["plugins"][request.form.get("plugin_name")] = {"data" : request.form.get("plugin_args"), "do" : request.form.get("plugin_do").strip()}
          jsons.dump("jsons_data/data.json", plugins)
     
     else:
@@ -78,9 +62,8 @@ def commands():
            commands["commands"][request.form.get("command_name")] = {
                "name" : request.form.get("command_name"), 
                "act_phrase" : data_of_list_strip(request.form.get("command_act").split(","), output=list),
-               "plugin" : request.form.getlist("plugin_for_command"),
-               "plugin_param" : data_of_list_strip(request.form.get("plugin_args").split(":"), output=dict),
-               "priority" : int(request.form.get("priority"))
+               "plugin" : request.form.getlist("plugin_for_command"), 
+               "jarvis_answer" : request.form.get("answer_for_command")
                }
            jsons.dump("jsons_data/data.json", commands)
        
@@ -94,9 +77,9 @@ def commands():
 @app.route("/config", methods=["POST"])
 def config():
    data = jsons.load("jsons_data/data.json")
-   data["cache"]["ats"] = True if request.form.get("ats") else False
-   data["cache"]["outside"] =  True if request.form.get("outside", False) else False
-   data["cache"]["logs"] =  True if request.form.get("logs", False) else False
+   data["cache"]["qm"] = True if request.form.get("qm") else False
+   data["cache"]["nm"] =  True if request.form.get("nm") else False
+   data["cache"]["logs"] =  True if request.form.get("logs") else False
    jsons.dump("jsons_data/data.json", data)
    return redirect(url_for("home"))
 

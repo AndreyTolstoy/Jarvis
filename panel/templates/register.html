@@ -20,21 +20,10 @@
     <form action="/" method="post">
         <input type="text" name="name" placeholder="Имя" required>
         <input type="date" name="birthday" placeholder="День рождения" required>
-        <input type="password" name="token" placeholder="Пароль для активации" required>
-        <p>Рекомендую использовать в пароле буквы. Рекомендуемая длина пароля > 6 символов</p>
-        {% if not password %} <!---При неправильном пароле, йоу-->
-         <style>
-             input[type="password"] {
-                border-color: red;
-             }
-         </style>
-        
-        {% endif %}
-
         <button>Далее</button>
     </form>
     <div class="footer">
-        <p>Support: @Tolstoy_Andrey</p>
+        <p>Support: @Tolstoy_Andrey - Telegram</p>
     </div>
 </body>
 </html>

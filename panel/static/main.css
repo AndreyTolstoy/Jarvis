@@ -1,7 +1,7 @@
 html {
     margin: 0;
     padding: 0;
-    background-repeat: no-repeat;
+    background-repeat:repeat-y;
     background-size: cover;
     background-image: url(./bg.png);
     font-family: "Source Code Pro", monospace;
@@ -47,6 +47,7 @@ select {
     width: 125px;
     height: 25px;
 }
+
 select::-webkit-scrollbar { /*For WebKit Browsers*/ /* Брал со stackoverflow чтобы убрать вертикальный скролл бар в селект */
     width: 0;
 }
@@ -57,7 +58,7 @@ input, select {
 
 
 select, input, textarea {
-    margin-top: 12px;
+    margin-bottom: 12px;
     background: none;
     border: solid;
     border-color: gray;
@@ -77,7 +78,6 @@ textarea::placeholder {
 
 label, p {
     font-size: 16px;
-    margin-top: 0px;
     color: gray;
 }
 
@@ -92,7 +92,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .save:hover {
@@ -115,6 +115,16 @@ label {
 input[type="checkbox"] {
     width: 15px;
     height: 15px;
-    transform: translateY(-25%);
+    margin-top: 12px;
 }
 
+
+.help {
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.config {
+    margin-top: 0px;
+}
