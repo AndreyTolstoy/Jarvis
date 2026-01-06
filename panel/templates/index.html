@@ -21,7 +21,7 @@
       <select name="plugin">
         <option selected>Не выбрано</option>
         {% for plugin in plugins %}
-             <option value={{ plugin }} {% if active_plugin_name == plugin %} selected {% endif %}>{{ plugin }}</option>
+             <option value="{{ plugin }}" {% if active_plugin_name == plugin %} selected {% endif %}>{{ plugin }}</option>
         {% endfor %}
       </select>
       <p class="help">Действие</p>
@@ -41,7 +41,7 @@
       <select name="command">
             <option selected>Не выбрано</option>
             {% for command in commands %}
-             <option value={{ command }} {% if active_command_name == command %} selected {% endif %}>{{ command }}</option>
+             <option value="{{ command }}" {% if active_command_name == command %} selected {% endif %}>{{ command }}</option>
             {% endfor %}
       </select>
       <input type="text" name="command_name" placeholder= "Название команды" {% if active_command %} value={{ active_command_name }} {% endif %}>
@@ -49,7 +49,7 @@
       <p class="help">Плагины (привязка под эту команду)</p>
       <select name="plugin_for_command" multiple>
             {% for plugin in plugins %}
-             <option value={{ plugin }} {% if active_command and plugin in active_command["plugin"] %} selected {% endif %}>{{ plugin }}</option>
+             <option value="{{ plugin }}" {% if active_command and plugin in active_command["plugin"] %} selected {% endif %}>{{ plugin }}</option>
             {% endfor %}
       </select>
       
@@ -57,7 +57,7 @@
       <select name="answer_for_command">
             <option value="random" selected>Положительный</option>
             {% for answer in sounds %}
-             <option value={{ answer }} {% if active_command and answer in active_command["answer"] %} selected {% endif %}>{{ answer }}</option>
+             <option value="{{ answer }}" {% if active_command and answer in active_command["answer"] %} selected {% endif %}>{{ answer }}</option>
             {% endfor %}
       </select>
  

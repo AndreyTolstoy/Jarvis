@@ -1,162 +1,233 @@
 {
-  "commands": {
-    "проводник": {
-      "name": "проводник",
-      "act_phrase": ["проводник"],
-      "plugin": ["explorer"],
-      "jarvis_answer": "random"
+    "commands": {
+        "проводник": {
+            "name": "проводник",
+            "act_phrase": [
+                "проводник"
+            ],
+            "plugin": [
+                "explorer"
+            ],
+            "jarvis_answer": "random"
+        },
+        "браузер": {
+            "name": "браузер",
+            "act_phrase": [
+                "браузер"
+            ],
+            "plugin": [
+                "browser"
+            ],
+            "jarvis_answer": "random"
+        },
+        "калькулятор": {
+            "name": "калькулятор",
+            "act_phrase": [
+                "калькулятор"
+            ],
+            "plugin": [
+                "calculator"
+            ],
+            "jarvis_answer": "random"
+        },
+        "новая_вкладка": {
+            "name": "новая_вкладка",
+            "act_phrase": [
+                "новая вкладка"
+            ],
+            "plugin": [
+                "new_tab"
+            ],
+            "jarvis_answer": "random"
+        },
+        "закрыть_вкладку": {
+            "name": "закрыть_вкладку",
+            "act_phrase": [
+                "закрой вкладку",
+                "удали вкладку"
+            ],
+            "plugin": [
+                "close_tab"
+            ],
+            "jarvis_answer": "random"
+        },
+        "перезагрузить_страницу": {
+            "name": "перезагрузить_страницу",
+            "act_phrase": [
+                "перезагрузи страницу",
+                "обнови страницу"
+            ],
+            "plugin": [
+                "refresh_page"
+            ],
+            "jarvis_answer": "random"
+        },
+        "вперёд_страница": {
+            "name": "вперёд_страница",
+            "act_phrase": [
+                "вперёд",
+                "следующая страница"
+            ],
+            "plugin": [
+                "forward_page"
+            ],
+            "jarvis_answer": "random"
+        },
+        "назад_страница": {
+            "name": "назад_страница",
+            "act_phrase": [
+                "назад",
+                "предыдущая страница"
+            ],
+            "plugin": [
+                "back_page"
+            ],
+            "jarvis_answer": "random"
+        },
+        "история": {
+            "name": "история",
+            "act_phrase": [
+                "история браузера",
+                "история"
+            ],
+            "plugin": [
+                "history"
+            ],
+            "jarvis_answer": "random"
+        },
+        "загрузки": {
+            "name": "загрузки",
+            "act_phrase": [
+                "загруженные файлы",
+                "загрузки"
+            ],
+            "plugin": [
+                "downloads"
+            ],
+            "jarvis_answer": "random"
+        },
+        "полноэкранный": {
+            "name": "полноэкранный",
+            "act_phrase": [
+                "полный экран",
+                "полноэкранный режим"
+            ],
+            "plugin": [
+                "fullscreen"
+            ],
+            "jarvis_answer": "random"
+        },
+        "поиск_по_странице": {
+            "name": "поиск_по_странице",
+            "act_phrase": [
+                "найти на странице",
+                "поиск на странице"
+            ],
+            "plugin": [
+                "find_page"
+            ],
+            "jarvis_answer": "random"
+        },
+        "панель": {
+            "name": "панель",
+            "act_phrase": [
+                "панель управления",
+                "панель"
+            ],
+            "plugin": [
+                "панель"
+            ],
+            "jarvis_answer": "random"
+        },
+        "закрыть_окно": {
+            "name": "закрыть окно",
+            "act_phrase": [
+                "закрой окно",
+                "закрой активное окно"
+            ],
+            "plugin": [
+                "закрыть_окно"
+            ],
+            "jarvis_answer": "random"
+        },
+        "ютуб": {
+            "name": "ютуб",
+            "act_phrase": [
+                "ютуб",
+                "youtube"
+            ],
+            "plugin": [
+                "yt"
+            ],
+            "jarvis_answer": "О чем я думал, обычно у нас все веселенькое.wav"
+        }
     },
-    "браузер": {
-      "name": "браузер",
-      "act_phrase": ["браузер"],
-      "plugin": ["browser"],
-      "jarvis_answer": "random"
+    "plugins": {
+        "explorer": {
+            "data": "win+e",
+            "do": "key"
+        },
+        "browser": {
+            "data": "https://",
+            "do": "open"
+        },
+        "calculator": {
+            "data": "calc",
+            "do": "open"
+        },
+        "new_tab": {
+            "data": "ctrl+t",
+            "do": "key"
+        },
+        "close_tab": {
+            "data": "ctrl+w",
+            "do": "key"
+        },
+        "refresh_page": {
+            "data": "f5",
+            "do": "key"
+        },
+        "forward_page": {
+            "data": "alt+right",
+            "do": "key"
+        },
+        "back_page": {
+            "data": "alt+left",
+            "do": "key"
+        },
+        "history": {
+            "data": "ctrl+h",
+            "do": "key"
+        },
+        "downloads": {
+            "data": "ctrl+j",
+            "do": "key"
+        },
+        "fullscreen": {
+            "data": "f11",
+            "do": "key"
+        },
+        "find_page": {
+            "data": "ctrl+f",
+            "do": "key"
+        },
+        "панель": {
+            "data": "http://127.0.0.1:256",
+            "do": "open"
+        },
+        "закрыть_окно": {
+            "data": "alt+f4",
+            "do": "key"
+        },
+        "yt": {
+            "data": "https://youtube.com",
+            "do": "open"
+        }
     },
-    "блокнот": {
-      "name": "блокнот",
-      "act_phrase": ["блокнот"],
-      "plugin": ["notepad"],
-      "jarvis_answer": "random"
-    },
-    "калькулятор": {
-      "name": "калькулятор",
-      "act_phrase": ["калькулятор"],
-      "plugin": ["calculator"],
-      "jarvis_answer": "random"
-    },
-    "новая_вкладка": {
-      "name": "новая_вкладка",
-      "act_phrase": ["новая вкладка"],
-      "plugin": ["new_tab"],
-      "jarvis_answer": "random"
-    },
-    "закрыть_вкладку": {
-      "name": "закрыть_вкладку",
-      "act_phrase": ["закрой вкладку", "удали вкладку"],
-      "plugin": ["close_tab"],
-      "jarvis_answer": "random"
-    },
-    "перезагрузить_страницу": {
-      "name": "перезагрузить_страницу",
-      "act_phrase": ["перезагрузи страницу", "обнови страницу"],
-      "plugin": ["refresh_page"],
-      "jarvis_answer": "random"
-    },
-    "вперёд_страница": {
-      "name": "вперёд_страница",
-      "act_phrase": ["вперёд", "следующая страница"],
-      "plugin": ["forward_page"],
-      "jarvis_answer": "random"
-    },
-    "назад_страница": {
-      "name": "назад_страница",
-      "act_phrase": ["назад", "предыдущая страница"],
-      "plugin": ["back_page"],
-      "jarvis_answer": "random"
-    },
-    "история": {
-      "name": "история",
-      "act_phrase": ["история браузера", "история"],
-      "plugin": ["history"],
-      "jarvis_answer": "random"
-    },
-    "загрузки": {
-      "name": "загрузки",
-      "act_phrase": ["загруженные файлы", "загрузки"],
-      "plugin": ["downloads"],
-      "jarvis_answer": "random"
-    },
-    "полноэкранный": {
-      "name": "полноэкранный",
-      "act_phrase": ["полный экран", "полноэкранный режим"],
-      "plugin": ["fullscreen"],
-      "jarvis_answer": "random"
-    },
-    "поиск_по_странице": {
-      "name": "поиск_по_странице",
-      "act_phrase": ["найти на странице", "поиск на странице"],
-      "plugin": ["find_page"],
-      "jarvis_answer": "random"
-    },
-    "панель": {
-      "name": "панель",
-      "act_phrase": ["панель управления", "панель"],
-      "plugin": ["панель"],
-      "jarvis_answer": "random"
-    },
-    "закрыть_окно" : {
-       "name" : "закрыть окно",
-       "act_phrase": ["закрой окно", "закрой активное окно"],
-       "plugin": ["закрыть_окно"],
-       "jarvis_answer": "random"
+    "cache": {
+        "qm": false,
+        "nm": true,
+        "logs": false,
+        "hp_status": false
     }
-  },
-  "plugins": {
-    "explorer": {
-      "data": "win+e",
-      "do": "key"
-    },
-    "browser": {
-      "data": "https://",
-      "do": "open"
-    },
-    "notepad": {
-      "data": "notepad",
-      "do": "open"
-    },
-    "calculator": {
-      "data": "calc",
-      "do": "open"
-    },
-    "new_tab": {
-      "data": "ctrl+t",
-      "do": "key"
-    },
-    "close_tab": {
-      "data": "ctrl+w",
-      "do": "key"
-    },
-    "refresh_page": {
-      "data": "f5",
-      "do": "key"
-    },
-    "forward_page": {
-      "data": "alt+right",
-      "do": "key"
-    },
-    "back_page": {
-      "data": "alt+left",
-      "do": "key"
-    },
-    "history": {
-      "data": "ctrl+h",
-      "do": "key"
-    },
-    "downloads": {
-      "data": "ctrl+j",
-      "do": "key"
-    },
-    "fullscreen": {
-      "data": "f11",
-      "do": "key"
-    },
-    "find_page": {
-      "data": "ctrl+f",
-      "do": "key"
-    },
-    "панель": {
-      "data": "http://127.0.0.1:256",
-      "do": "open"
-    },
-    "закрыть_окно": {
-        "data": "alt+f4",
-        "do": "key"
-    }
-  },
-  "cache": {
-    "qm": false,
-    "nm": false,
-    "logs": false,
-    "hp_status": false
-  }
 }

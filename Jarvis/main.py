@@ -7,7 +7,7 @@ from Panel.jsons import load, dump
 from Jarvis.plugin_run import plugin_run
 
 import speech_recognition
-import pyglet
+import winsound
 import random
 
 #Для функции hb - happy birthday
@@ -50,9 +50,7 @@ class Commands:
         else:
             answer = self.jarvis_answer
 
-        answer = pyglet.resource.media("Sounds/" + answer)
-        answer.play()
-        pyglet.app.exit()
+        winsound.PlaySound(f"Sounds/{answer}", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     def command_detector_algorithm(self, text, nm):
             if nm == True and "джарвис" in text or nm == False:
