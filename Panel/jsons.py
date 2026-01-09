@@ -7,7 +7,7 @@ def load(file):
      return json.load(f)
    
   except:
-    return {"commands" : {}, "plugins" : {}, "cache": {"qm" : False, "nm" : False, "logs" : False, "hp_status" : False}}
+    return {"commands" : {}, "plugins" : {}, "cache": {"qm" : False, "nm" : False, "logs" : False, "last_hp" : False}}
   
 
 def dump(file, data):

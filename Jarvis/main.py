@@ -10,31 +10,39 @@ import speech_recognition
 import winsound
 import random
 
-#Для функции hb - happy birthday
+#Для hb & gm
 import webbrowser
 import datetime
 
+text = ""
 def hb():
     data = load("jsons_data/data.json")
 
-    if "birthday" in data["cache"] and datetime.datetime.strptime(data["cache"]["birthday"], "%Y-%m-%d").strftime("%m-%d") == datetime.datetime.now().strftime("%m-%d") and data["cache"]["hp_status"] != True:
-       webbrowser.open("https://youtu.be/Dm2nj8GBASY?si=SBfgscwgE-57bvGG")
-       Commands().answer(name="Поздравляю сэр.wav")
-       data["cache"]["hp_status"] = True
+    if "birthday" in data["cache"] and datetime.datetime.strptime(data["cache"]["birthday"], "%Y-%m-%d").strftime("%m-%d") == datetime.datetime.now().strftime("%m-%d") and data["cache"]["last_hp"] != datetime.datetime.now().strftime("%Y"):
+       webbrowser.open("https://youtu.be/Dm2nj8GBASY?si=tXQ_RDV4naWigUct&t=0")
+       Commands(jarvis_answer="Поздравляю сэр.wav").answer()
+       data["cache"]["last_hp"] = datetime.datetime.now().strftime("%Y") #*записываем что в этом году уже поздравили
        dump("jsons_data/data.json", data)
 
+def gm():
+    if int(datetime.datetime.now().strftime("%H")) < 11:
+        Commands(jarvis_answer="Доброе утро.wav").answer() #*Good morning New-Yorkers
+
 def listen():
-        with speech_recognition.Microphone() as mic:
-            try:
-                sr = speech_recognition.Recognizer()
-                sr.pause_threshold = 0.5
-                sr.adjust_for_ambient_noise(source=mic, duration=0.75)
-                audio = sr.listen(source=mic, timeout=5)
-                query = sr.recognize_google(audio_data=audio, language='ru-RU').lower()
-                print(f"Вы сказали: {query}")
-                return query
-            except Exception:
-                return ""
+        global text
+        while True:
+         with speech_recognition.Microphone() as mic:
+             try:
+                 sr = speech_recognition.Recognizer()
+                 sr.pause_threshold = 0.5
+                 sr.adjust_for_ambient_noise(source=mic)
+                 audio = sr.listen(source=mic, timeout=5)
+                 query = sr.recognize_google(audio_data=audio, language='ru-RU').lower()
+                 print(f"Вы сказали: {query}")
+                 text = query
+                 
+             except Exception:
+                 pass
             
 class Commands:
     def __init__(self, name=None, act_phrase=[], plugin=[], jarvis_answer=None):
@@ -43,7 +51,7 @@ class Commands:
         self.plugin = plugin
         self.jarvis_answer = jarvis_answer
 
-    def answer(self): 
+    def answer(self):
         if self.jarvis_answer == "random":
          answer = random.choice(["Всегда к вашим услугам сэр.wav", "Да сэр.wav", "Да сэр(второй).wav", "Есть.wav", "К вашим услугам сэр.wav", "Запрос выполнен сэр.wav"])
         
@@ -57,12 +65,15 @@ class Commands:
                 if any(phrase in text for phrase in self.act_phrase):
                   return True
                 
-                accuracy = 0
                 for phrases in self.act_phrase:
+                        accuracy = 0
                         for phrase in phrases.split(" "):
                          if phrase in text:
                             accuracy += 1
-                
+
+                         elif phrase[:-2] in text:
+                             accuracy +=1
+
                 if accuracy == 2:
                     return True
 
@@ -82,7 +93,10 @@ class Main(Commands):
       super().__init__(name, act_phrase, plugin)
       
   def main(self):
-   hb()
+   global text
+   hb() #?happy birthday
+   gm() #?good morning XD
+       
    data = load("jsons_data/data.json")
    if "панель" not in data["commands"]:
         data["commands"]["панель"] = {"name" : "панель", "act_phrase" : ["панель управления"], "plugin" : ["панель"], "jarvis_answer" : "random"}
@@ -91,9 +105,7 @@ class Main(Commands):
         data = load("jsons_data/data.json")
 
    while True:
-    text = listen()
     data = load("jsons_data/data.json")
-    config = data["cache"]
     self.Jarvis_logs(f"Чтение данных завершено ✅")
         
     if text: 
@@ -117,5 +129,7 @@ class Main(Commands):
 
             plugin_run(command.plugin)
             answer_status = True
+        
+        text = ""
         
         
