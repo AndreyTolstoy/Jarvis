@@ -160,6 +160,41 @@
                 "yt"
             ],
             "jarvis_answer": "О чем я думал, обычно у нас все веселенькое.wav"
+        },
+
+        "пауза": {
+            "name": "пауза",
+            "act_phrase": [
+                "пауза",
+                "пробел"
+            ],
+            "plugin": [
+                "pause"
+            ],
+            "jarvis_answer": "random"
+        },
+        "прошлое_видео": {
+            "name": "прошлое_видео",
+            "act_phrase": [
+                "прошлое видео",
+                "предыдущее видео"
+            ],
+            "plugin": [
+                "past_video"
+            ],
+            "jarvis_answer": "random"
+        },
+        "следующее_видео": {
+            "name": "следующее_видео",
+            "act_phrase": [
+                "следующее видео",
+                "next видео",
+                "некст видео"
+            ],
+            "plugin": [
+                "next_video"
+            ],
+            "jarvis_answer": "random"
         }
     },
     "plugins": {
@@ -222,14 +257,24 @@
         "yt": {
             "data": "https://youtube.com",
             "do": "open"
+        },
+        "pause" : {
+            "data": "space",
+            "do": "key"
+        },
+        "past_video" : {
+            "data": "shift+p",
+            "do": "key"
+        },
+        "next_video" : {
+            "data": "shift+n",
+            "do": "key"
         }
+        
     },
     "cache": {
         "qm": false,
         "nm": false,
-        "logs": false,
-        "last_hp": "2026",
-        "name": "AT",
-        "birthday": "2010-01-09"
+        "logs": false
     }
 }

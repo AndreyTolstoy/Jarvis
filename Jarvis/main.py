@@ -62,7 +62,7 @@ class Commands:
 
     def command_detector_algorithm(self, text, nm):
             if nm == True and "джарвис" in text or nm == False:
-                if any(phrase in text for phrase in self.act_phrase):
+                if any(phrase in text for phrase in self.act_phrase) or any(phrase[:-1] in text for phrase in self.act_phrase):
                   return True
                 
                 for phrases in self.act_phrase:

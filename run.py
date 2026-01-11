@@ -6,6 +6,7 @@ from Panel.server import run_server
 from title import title
 import colorama
 import time
+colorama.just_fix_windows_console()
 print(colorama.Fore.RED + title + colorama.Style.RESET_ALL)
 
 if __name__ == "__main__":
