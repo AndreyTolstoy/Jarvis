@@ -1,9 +1,10 @@
 import json
+import os
 
 
 def load(file):
   try:
-   with open(file, "r", encoding='utf-8') as f:
+   with open(os.path.dirname(__file__)[:-6] + "\\" + file, "r", encoding='utf-8') as f:
      return json.load(f)
    
   except:
@@ -11,5 +12,5 @@ def load(file):
   
 
 def dump(file, data):
-  with open(file, "w", encoding='utf-8') as f:
+  with open(os.path.dirname(__file__)[:-6] + "\\" + file, "w", encoding='utf-8') as f:
     json.dump(data, f, indent=4, ensure_ascii=False)

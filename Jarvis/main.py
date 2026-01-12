@@ -9,6 +9,7 @@ from Jarvis.plugin_run import plugin_run
 import speech_recognition
 import winsound
 import random
+import os
 
 #Для hb & gm
 import webbrowser
@@ -16,13 +17,13 @@ import datetime
 
 text = ""
 def hb():
-    data = load("jsons_data/data.json")
+    data = load("jsons_data\\data.json")
 
     if "birthday" in data["cache"] and datetime.datetime.strptime(data["cache"]["birthday"], "%Y-%m-%d").strftime("%m-%d") == datetime.datetime.now().strftime("%m-%d") and data["cache"]["last_hp"] != datetime.datetime.now().strftime("%Y"):
        webbrowser.open("https://youtu.be/Dm2nj8GBASY?si=tXQ_RDV4naWigUct&t=0")
        Commands(jarvis_answer="Поздравляю сэр.wav").answer()
        data["cache"]["last_hp"] = datetime.datetime.now().strftime("%Y") #*записываем что в этом году уже поздравили
-       dump("jsons_data/data.json", data)
+       dump("jsons_data\\data.json", data)
 
 def gm():
     if int(datetime.datetime.now().strftime("%H")) < 11:
@@ -58,7 +59,7 @@ class Commands:
         else:
             answer = self.jarvis_answer
 
-        winsound.PlaySound(f"Sounds/{answer}", winsound.SND_FILENAME | winsound.SND_ASYNC)
+        winsound.PlaySound(os.path.dirname(__file__)[:-6] + "\\" + f"Sounds\\{answer}", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     def command_detector_algorithm(self, text, nm):
             if nm == True and "джарвис" in text or nm == False:
@@ -97,15 +98,15 @@ class Main(Commands):
    hb() #?happy birthday
    gm() #?good morning XD
        
-   data = load("jsons_data/data.json")
+   data = load("jsons_data\\data.json")
    if "панель" not in data["commands"]:
         data["commands"]["панель"] = {"name" : "панель", "act_phrase" : ["панель управления"], "plugin" : ["панель"], "jarvis_answer" : "random"}
         data["plugins"]["панель"] = {"data" : "http://127.0.0.1:256", "do" : "open"}
-        dump("jsons_data/data.json", data)
-        data = load("jsons_data/data.json")
+        dump("jsons_data\\data.json", data)
+        data = load("jsons_data\\data.json")
 
    while True:
-    data = load("jsons_data/data.json")
+    data = load("jsons_data\\data.json")
     self.Jarvis_logs(f"Чтение данных завершено ✅")
         
     if text: 

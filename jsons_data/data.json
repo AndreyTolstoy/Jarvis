@@ -161,7 +161,6 @@
             ],
             "jarvis_answer": "О чем я думал, обычно у нас все веселенькое.wav"
         },
-
         "пауза": {
             "name": "пауза",
             "act_phrase": [
@@ -258,19 +257,18 @@
             "data": "https://youtube.com",
             "do": "open"
         },
-        "pause" : {
+        "pause": {
             "data": "space",
             "do": "key"
         },
-        "past_video" : {
+        "past_video": {
             "data": "shift+p",
             "do": "key"
         },
-        "next_video" : {
+        "next_video": {
             "data": "shift+n",
             "do": "key"
         }
-        
     },
     "cache": {
         "qm": false,

@@ -9,7 +9,7 @@ log.setLevel(logging.ERROR)
 
 @app.route("/", methods=["POST", "GET"])
 def home():
-    data = jsons.load("jsons_data/data.json")
+    data = jsons.load("jsons_data\\data.json")
     if "name" not in data["cache"]:
             if request.method == "POST":
              data["cache"]["name"] = request.form.get("name")
@@ -17,7 +17,7 @@ def home():
              data["cache"]["qm"] = False
              data["cache"]["nm"] = False
              data["cache"]["logs"] = False
-             jsons.dump("jsons_data/data.json", data)
+             jsons.dump("jsons_data\\data.json", data)
 
             else:
              return render_template("register.html")
@@ -28,11 +28,11 @@ def home():
     active_command = request.args.get("active_command")
     active_command_name = active_command
     active_command = (data["commands"][active_command_name] if active_command_name else None)
-    return render_template("index.html", data = data["cache"], plugins = data["plugins"], commands = data["commands"], active_plugin = active_plugin,active_plugin_name = active_plugin_name, active_command = active_command, active_command_name = active_command_name, sounds=os.listdir("Sounds"))
+    return render_template("index.html", data = data["cache"], plugins = data["plugins"], commands = data["commands"], active_plugin = active_plugin,active_plugin_name = active_plugin_name, active_command = active_command, active_command_name = active_command_name, sounds=os.path.dirname(__file__)[:-6] + "\\" + "Sounds")
 
 @app.route("/plugin", methods=["POST"])
 def plugins():
-    plugins = jsons.load("jsons_data/data.json")
+    plugins = jsons.load("jsons_data\\data.json")
     if request.form.get("action") == "plugin_save":
      if request.form.get("plugin") != "Не выбрано" and not request.form.get("plugin_name"):
          active_plugin = request.form.get("plugin")
@@ -41,17 +41,17 @@ def plugins():
      else:
         if request.form.get("plugin_name"):
          plugins["plugins"][request.form.get("plugin_name")] = {"data" : request.form.get("plugin_args"), "do" : request.form.get("plugin_do").strip()}
-         jsons.dump("jsons_data/data.json", plugins)
+         jsons.dump("jsons_data\\data.json", plugins)
     
     else:
         del plugins["plugins"][request.form.get("plugin")]
-        jsons.dump("jsons_data/data.json", plugins)
+        jsons.dump("jsons_data\\data.json", plugins)
     
     return redirect(url_for("home"))
 
 @app.route("/command", methods=["POST"])
 def commands():
-    commands = jsons.load("jsons_data/data.json")
+    commands = jsons.load("jsons_data\\data.json")
     if request.form.get("action") == "command_save":
      if request.form.get("command") != "Не выбрано" and not request.form.get("command_name"):
          active_command = request.form.get("command")
@@ -65,22 +65,22 @@ def commands():
                "plugin" : request.form.getlist("plugin_for_command"), 
                "jarvis_answer" : request.form.get("answer_for_command")
                }
-           jsons.dump("jsons_data/data.json", commands)
+           jsons.dump("jsons_data\\data.json", commands)
        
     else:
         if request.form.get("command"):
          del commands["commands"][request.form.get("command")]
-         jsons.dump("jsons_data/data.json", commands)
+         jsons.dump("jsons_data\\data.json", commands)
         
     return redirect(url_for("home"))
 
 @app.route("/config", methods=["POST"])
 def config():
-   data = jsons.load("jsons_data/data.json")
+   data = jsons.load("jsons_data\\data.json")
    data["cache"]["qm"] = True if request.form.get("qm") else False
    data["cache"]["nm"] =  True if request.form.get("nm") else False
    data["cache"]["logs"] =  True if request.form.get("logs") else False
-   jsons.dump("jsons_data/data.json", data)
+   jsons.dump("jsons_data\\data.json", data)
    return redirect(url_for("home"))
 
 
